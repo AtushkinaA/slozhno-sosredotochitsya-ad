@@ -1,4 +1,33 @@
-/*
-  Переменные для вашего проекта
-  и их переопределение под различные устройства
-*/
+:root {
+    --bg-color: rgba(0, 0, 40, 1);
+    --bg-image: url('../img/image.png');
+    --text-color: rgba(255, 0, 112, 1);
+    --h1-color: rgba(219, 0, 255, 1);
+    --h1-shadow: 4px 4px 0px 0px rgba(255, 0, 112, 1);
+
+    --highlight-bg: rgba(255, 0, 112, 1);
+    --highlight-text: rgba(0, 0, 40, 1);
+    --text-link-shadow: rgba(255, 0, 112, 1);
+
+    --body-color: rgba(241, 178, 206, 1);
+    --rec-display: flex;
+
+    --page-gutter: 20px;
+    --grid-gap: 20px;
+    --corner-size: 25px;
+
+    --display-size: 157px;
+}
+
+@media (max-width: 900px) {
+    :root {
+        --display-size: 120px;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --page-gutter: 10px;
+        --display-size: 112px;
+    }
+}
