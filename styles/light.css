@@ -1,16 +1,28 @@
-/*
-  Специально для светлой темы при наличии класса.
-  Здесь окажутся стили, которые нужно переопределить принудительно,
-  переключая тему
-*/
+.theme-light {
+    --bg-color: rgba(255, 241, 247, 1);
+    --bg-image: url('../img/cover-image-light 1.png');
+    --text-color: rgba(53, 52, 48, 1);
+    --h1-color: rgba(255, 194, 230, 1);
+    --h1-shadow: 4px 4px 0px 0px rgba(255, 141, 203, 1);
 
-:root.theme-light {
-  /* сохраните этот селектор в приведённом виде.
-    Так стили написанные ниже будут иметь больший вес,
-    чем стили в медиазапросе предпочтений пользователя
-  */
+    --highlight-bg: rgba(255, 141, 203, 1);
+    --highlight-text: rgba(53, 52, 48, 1);
+    --text-link-shadow: rgba(255, 141, 203, 1);
+    --body-color: rgba(53, 52, 48, 1);
+    --rec-display: none;
 }
 
-.theme-light .page {
-  /* Вам также нужно будет написать ряд подобных селекторов */
+@media (prefers-color-scheme: light) {
+    .theme-auto {
+        --bg-color: rgba(255, 241, 247, 1);
+        --bg-image: url('../img/cover-image-light 1.png');
+        --text-color: rgba(53, 52, 48, 1);
+        --h1-color: rgba(255, 194, 230, 1);
+        --h1-shadow: 4px 4px 0px 0px rgba(255, 141, 203, 1);
+
+        --highlight-bg: rgba(255, 141, 203, 1);
+        --highlight-text: rgba(53, 52, 48, 1);
+        --body-color: rgba(53, 52, 48, 1);
+        --rec-display: none;
+    }
 }
