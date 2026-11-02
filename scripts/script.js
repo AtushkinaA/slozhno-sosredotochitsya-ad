@@ -1,52 +1,25 @@
-(function initTheme() {
-  const theme = localStorage.getItem('theme');
-  if (theme) {
-    setTheme(theme);
-  }
-})();
-
 document.addEventListener('DOMContentLoaded', () => {
-  const currentTheme = [...document.documentElement.classList]
-    .find((cn) => cn.startsWith('theme-'))
-    ?.replace('theme-', '');
-  const themeButtons = [
-    ...document.querySelectorAll('.header__theme-menu-button'),
-  ];
-  setActiveButton(themeButtons, currentTheme);
+    const themeButtons = document.querySelectorAll('[data-theme]');
+    const body = document.body;
 
-  themeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const chosenTheme = [...button.classList]
-        .find((cn) => cn.includes('_type_'))
-        .split('_type_')[1];
-      setTheme(chosenTheme);
-      setActiveButton(themeButtons, chosenTheme);
+    function applyTheme(theme) {
+        body.classList.remove('theme-dark', 'theme-light', 'theme-auto');
+        body.classList.add(`theme-${theme}`);
+        themeButtons.forEach(btn => {
+            if (btn.dataset.theme === theme) {
+                btn.classList.add('is-active');
+            } else {
+                btn.classList.remove('is-active');
+            }
+        });
+        localStorage.setItem('no-focus-theme', theme);
+    }
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newTheme = btn.dataset.theme;
+            applyTheme(newTheme);
+        });
     });
-  });
+    const savedTheme = localStorage.getItem('no-focus-theme') || 'dark';
+    applyTheme(savedTheme);
 });
-
-function setTheme(theme) {
-  document.documentElement.className = '';
-  document.documentElement.classList.add(`theme-${theme}`);
-  localStorage.setItem('theme', theme);
-}
-
-function setActiveButton(buttonsArray, theme) {
-  buttonsArray.forEach((button) => {
-    button.classList.remove('header__theme-menu-button_active');
-    button.removeAttribute('disabled');
-  });
-  const target = buttonsArray.find((button) =>
-    button.classList.contains(`header__theme-menu-button_type_${theme}`)
-  );
-  if (target) {
-    target.classList.add('header__theme-menu-button_active');
-    target.setAttribute('disabled', true);
-  } else {
-    const autoButton = document.querySelector(
-      '.header__theme-menu-button_type_auto'
-    );
-    autoButton.classList.add('header__theme-menu-button_active');
-    autoButton.setAttribute('disabled', true);
-  }
-}
